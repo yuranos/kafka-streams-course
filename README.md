@@ -1,3 +1,29 @@
+## THIS PART IS MAINTAINED BY yuranos
+
+### Adding datagen:
+Run docker-compose first.
+See config examples [here](https://github.com/confluentinc/kafka-connect-datagen/tree/master/config)
+
+Configure connector with quickstart as described
+[here](https://github.com/confluentinc/kafka-connect-datagen):
+
+    curl -X POST -H "Content-Type: application/json" --data @users_conf.json http://localhost:8083/connectors
+
+View logs:
+
+    docker-compose logs connect-datagen
+
+Check what's going on in Kafka:
+
+    docker-compose exec kafka /bin/bash
+    [appuser@kafka ~]$ kafka-run-class kafka.tools.GetOffsetShell --broker-list localhost:9092 --topic users
+
+Or:
+
+    docker-compose exec connect-datagen kafka-console-consumer --topic users --bootstrap-server kafka:29092  --property print.key=true --max-messages 5 --from-beginning
+
+
+
 [![Build Status](https://travis-ci.org/simplesteph/kafka-streams-course.svg?branch=master)](https://travis-ci.org/simplesteph/kafka-streams-course)
 
 # Learning
